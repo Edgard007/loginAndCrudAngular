@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 // Forms
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // ==> Services
+import { GlobalService } from '../../services/global/global.service';
 import { LoginService } from '../../services/Login/login.service';
-
-// ==> NG Zorro
-import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +20,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private services: LoginService,
-    private notification: NzNotificationService
+    private global: GlobalService,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
@@ -32,21 +32,35 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login() {
+  async login() {
     const valid = this.loginForm.valid;
 
     if (valid) {
-      console.log('INICIAR SESION');
+      const valueForm = this.loginForm.value;
+
+      // ==> Verificar si existe Usuario
+      const result: any = await this.services.loginWithUserAndPass(
+        valueForm?.user,
+        valueForm?.pass
+      );
+
+      // ==> Destructurar Result
+      const { ok } = result;
+
+      if (ok) this.route.navigate(['/dashboard']);
+      else {
+        this.global.createNotification(
+          'error',
+          'Error',
+          'Usuario o contraseña incorrectos'
+        );
+      }
     } else {
-      this.createNotification(
+      this.global.createNotification(
         'error',
         'Error',
         'Por favor, complete el formulario'
       );
     }
-  }
-
-  createNotification(type: string, titule: string, msg: string): void {
-    this.notification.create(type, titule, msg);
   }
 }
