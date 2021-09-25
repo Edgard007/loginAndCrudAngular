@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <!-- Container Body -->
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+
+      <!-- Icon -->
+      <!-- Header Img -->
+      <div class="row justify-content-center">
+        <div class="col-md-8 headerRow">
+          <div class="divNameHeader">
+            <h1 class="textHeader">Inicio de Sesión</h1>
+          </div>
+        </div>
+        <div class="col-md-8 headerFooter">
+          <hr class="footerHeader" />
+        </div>
+      </div>
+
+      <!-- Formulario -->
+      <form [formGroup]="loginForm">
+        <input
+          type="text"
+          id="login"
+          class="fadeIn second"
+          formControlName="user"
+          placeholder="Usuario"
+        />
+        <input
+          type="password"
+          id="password"
+          class="fadeIn third"
+          formControlName="pass"
+          placeholder="Contraseña"
+        />
+        <input
+          type="submit"
+          class="fadeIn fourth"
+          value="Log In"
+          (click)="login()"
+        />
+      </form>
+
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" href="#">Forgot Password?</a>
+      </div>
+    </div>
+  </div>
+</div>
