@@ -20,11 +20,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // ==> NG Zorro
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent, DashboardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
