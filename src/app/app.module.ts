@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+
+// ==> Bootstrap modules
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+// ==> NG-Zorro modules
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 
 // ==> Pages
+import { AppComponent } from './app.component';
 import { LoginComponent } from './public/login/login.component';
 
 // Form
@@ -28,8 +32,8 @@ registerLocaleData(en);
   declarations: [AppComponent, LoginComponent, DashboardComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
+    AppRoutingModule,
     NgbModule,
     FormsModule,
     ReactiveFormsModule,

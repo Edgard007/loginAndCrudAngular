@@ -10,6 +10,12 @@ import { Usuario } from '../../intefraces/usuario';
 export class LoginService {
   constructor(private httpClient: HttpClient) {}
 
+  /**
+   * Función para verificar si existe usuario ingresado
+   * @param user <string> Usuario
+   * @param password <string> Contraseña
+   * @returns
+   */
   loginWithUserAndPass(user: string, password: string) {
     return new Promise((resolve, reject) => {
       this.httpClient.get('assets/fakeApi.json').subscribe(

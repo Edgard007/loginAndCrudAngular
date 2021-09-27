@@ -5,19 +5,22 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class LoginGuard implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): Observable<boolean> {
     return new Observable((observer) => {
+      // ==> Band de Sesión
       const logged = localStorage.getItem('sesion') || '';
 
+      // ==> Verificar si existe sesión
       if (logged) {
-        observer.next(true);
+        observer.next(false);
+        // ==> Si está logueado, mandar al Dashboard.
+        this.router.navigate(['dashboard']);
         observer.complete();
       } else {
-        // Si no está logueado, mandar al login.
-        this.router.navigate(['login']);
+        observer.next(true);
         observer.complete();
       }
     });
