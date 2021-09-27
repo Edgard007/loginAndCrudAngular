@@ -69,14 +69,28 @@ export class EmpleadoComponent implements OnInit {
     }
   }
 
-  validForm() {
+  async validForm() {
     const valid = this.empleadoForm.valid;
 
     if (valid) {
       const dataForm = this.empleadoForm.value;
-      console.log("dataForm", dataForm);
 
-      this.service.post(dataForm);
+      const result: any = await this.service.post(dataForm);
+
+      const { ok } = result;
+
+      if (ok) {
+        const exito = 'Información guardada correctamente';
+        this.global.createNotification('success', 'Éxito', exito);
+        this.obtainData();
+        this.inicializeForm();
+        this.showModal = false;
+      } else {
+        const error = 'Error al guardar registro, intente más tarde';
+        this.global.createNotification('error', 'Error', error);
+        this.inicializeForm();
+        this.showModal = false;
+      }
     } else {
       this.global.createNotification(
         'error',

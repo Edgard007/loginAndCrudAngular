@@ -10,37 +10,29 @@ import { Empleado } from '../../intefraces/empleado';
 export class EmpleadoService {
   constructor(private httpClient: HttpClient) {}
 
-  get() {
-    return new Promise((resolve, reject) => {
-      this.httpClient.get('assets/fakeApi.json').subscribe(
-        (res: any) => {
-          const employees: Array<Empleado> = res?.employees || [];
+  async get(): Promise<any> {
+    try {
+      const empleados: any = localStorage.getItem('empleados') || '';
+      const dataParse = empleados ? JSON.parse(empleados) : [];
 
-          resolve({
-            ok: employees.length > 0,
-            msg: employees.length > 0 ? 'Éxito' : 'Error',
-            data: employees,
-          });
-        },
-        (er) => {
-          console.error('|| ==> Error Get Data Employees <== ||', er);
-          reject(er);
-        }
-      );
-    });
+      return Promise.resolve({ ok: true, data: dataParse });
+    } catch (er) {
+      console.error('|| ==> Error Get Data Employees <== ||', er);
+    }
   }
 
-  post(data: Empleado) {
-    return new Promise((resolve, reject) => {
-      this.httpClient.post('assets/fakeApi.json', data).subscribe(
-        (res: any) => {
-          console.log('RESULT', res);
-        },
-        (er) => {
-          console.error('|| ==> Error saving employee data <== ||', er);
-          reject(er);
-        }
-      );
-    });
+  async post(data: Empleado): Promise<any> {
+    try {
+      const dataSave = (await localStorage.getItem('empleados')) || '';
+      const dataParse = dataSave ? JSON.parse(dataSave) : [];
+
+      const newData = [...dataParse, data];
+      await localStorage.removeItem('empleados');
+      await localStorage.setItem('empleados', JSON.stringify(newData));
+
+      return Promise.resolve({ ok: true });
+    } catch (er) {
+      console.error('|| ==> Error saving employee data <== ||', er);
+    }
   }
 }
