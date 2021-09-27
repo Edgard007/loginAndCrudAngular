@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class EmployeesGuard implements CanActivate {
   constructor(private router: Router) {}
 
   canActivate(): Observable<boolean> {
@@ -15,18 +15,8 @@ export class AuthGuard implements CanActivate {
 
       // ==> Verificar si existe sesión
       if (logged) {
-        const dataParse: any = logged ? JSON.parse(logged) : {};
-        console.log('dataParse', dataParse);
-
-        if (dataParse?.type === 'Admin') {
-          observer.next(true);
-          observer.complete();
-        } else {
-          observer.next(false);
-          // ==> Si no está logueado, mandar al login.
-          this.router.navigate(['vacunas']);
-          observer.complete();
-        }
+        observer.next(true);
+        observer.complete();
       } else {
         observer.next(false);
         // ==> Si no está logueado, mandar al login.

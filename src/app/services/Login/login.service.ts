@@ -31,6 +31,7 @@ export class LoginService {
             resolve({
               ok: filter.length > 0,
               msg: filter.length > 0 ? 'Éxito' : 'Error',
+              type: 'Admin',
             });
           } else {
             //* ==> Buscar usuario en empleados <== *//
@@ -41,20 +42,15 @@ export class LoginService {
               ? JSON.parse(empleados)
               : [];
 
-            console.log('user', user);
-            console.log('password', password);
-            console.log('dataParse', dataParse);
-
             const filterEmpleados = dataParse.filter(
               ({ userInfo }) =>
                 userInfo?.user === user && userInfo?.password === password
             );
 
-            console.log('filterEmpleados', filterEmpleados);
-
             resolve({
               ok: filterEmpleados.length > 0,
               msg: filterEmpleados.length > 0 ? 'Éxito' : 'Error',
+              type: 'Empleado',
             });
           }
         },

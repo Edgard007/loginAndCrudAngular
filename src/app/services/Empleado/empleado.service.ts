@@ -93,7 +93,6 @@ export class EmpleadoService {
 
   async delete(data: Empleado): Promise<any> {
     try {
-      console.log('DELETE');
       // ==> Obtener Data
       const dataSave = (await localStorage.getItem('empleados')) || '';
       const dataParse: Array<Empleado> = dataSave ? JSON.parse(dataSave) : [];

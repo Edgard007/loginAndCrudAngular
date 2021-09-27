@@ -60,10 +60,10 @@ export class LoginComponent implements OnInit {
       const result: any = await this.services.loginWithUserAndPass(user, pass);
 
       // ==> Destructurar Result
-      const { ok } = result;
+      const { ok, type } = result;
 
       if (ok) {
-        const userData = { userName: user, time: new Date() };
+        const userData = { userName: user, time: new Date(), type: type };
         await localStorage.setItem('sesion', JSON.stringify(userData) || ''); //==> Agregar bandera de Sesión
         this.app.checkSesion();
         this.route.navigate(['/empleados']);

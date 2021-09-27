@@ -32,12 +32,13 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './public/login/login.component';
 import { EmpleadoComponent } from './admin/empleado/empleado.component';
 import { NavComponent } from './components/nav/nav.component';
+import { VacunaComponent } from './admin/vacuna/vacuna.component';
 
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, NavComponent, EmpleadoComponent],
+  declarations: [AppComponent, LoginComponent, NavComponent, EmpleadoComponent, VacunaComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
