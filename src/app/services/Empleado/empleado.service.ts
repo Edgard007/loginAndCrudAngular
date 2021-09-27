@@ -30,7 +30,7 @@ export class EmpleadoService {
         ...newData,
         userInfo: {
           user: data?.correo,
-          pass: pass.toString(),
+          password: pass.toString(),
         },
       };
 
