@@ -26,6 +26,7 @@ export class EmpleadoComponent implements OnInit {
 
   public dataEmpleados!: Array<Empleado>;
   public showModal: boolean = false;
+  public isEdit: boolean = false;
   public isSelected: any = {}; // ==> Registro seleccionado
 
   constructor(
@@ -101,6 +102,56 @@ export class EmpleadoComponent implements OnInit {
     }
   }
 
+  edit(data: Empleado) {
+    this.empleadoForm = this.fb.group({
+      id: [data?.id, Validators.required],
+      nombre: [data?.nombre, Validators.required],
+      apellido: [data?.apellido, Validators.required],
+      correo: [data?.correo, [Validators.required, Validators.email]],
+    });
+
+    this.showModal = true; // ==> Show Modal
+    this.isEdit = true;
+  }
+
+  async editRecord() {
+    try {
+      const valid = this.empleadoForm.valid;
+
+      if (valid) {
+        const dataForm = this.empleadoForm.value;
+
+        const result: any = await this.service.put(dataForm);
+
+        const { ok } = result;
+
+        if (ok) {
+          const exito = 'Información modificada correctamente';
+          this.global.createNotification('success', 'Éxito', exito);
+          this.obtainData();
+          this.inicializeForm();
+          this.showModal = false;
+          this.isEdit = false;
+        } else {
+          const error = 'Error al modificar registro, intente más tarde';
+          this.global.createNotification('error', 'Error', error);
+          this.inicializeForm();
+          this.showModal = false;
+        }
+      } else {
+        this.global.createNotification(
+          'error',
+          'Error',
+          'Por favor, complete el formulario'
+        );
+      }
+    } catch (er) {
+      const error = 'Error al Editar Registro';
+      this.global.createNotification('error', 'Error', error);
+      console.error('|| ==> Error deleteRecord <== ||', er);
+    }
+  }
+
   async deleteRecord(data: Empleado) {
     try {
       const result: any = await this.service.delete(data);
@@ -117,7 +168,7 @@ export class EmpleadoComponent implements OnInit {
       }
     } catch (er) {
       const error = 'Error al Eliminar Registro';
-      // this.global.createNotification('error', 'Error', error);
+      this.global.createNotification('error', 'Error', error);
       console.error('|| ==> Error deleteRecord <== ||', er);
     }
   }

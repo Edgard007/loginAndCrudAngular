@@ -34,6 +34,13 @@
           <td>
             <i
               nz-icon
+              nzType="edit"
+              nzTheme="twotone"
+              class="anticon mx-3"
+              (click)="edit(data)"
+            ></i>
+            <i
+              nz-icon
               nzType="delete"
               nzTheme="twotone"
               class="anticon"
@@ -50,7 +57,7 @@
   [(nzVisible)]="showModal"
   nzTitle="Agregar Empleado"
   (nzOnCancel)="this.showModal = false"
-  (nzOnOk)="validForm()"
+  (nzOnOk)="!isEdit ? validForm() : editRecord()"
 >
   <ng-container *nzModalContent>
     <form [formGroup]="empleadoForm">

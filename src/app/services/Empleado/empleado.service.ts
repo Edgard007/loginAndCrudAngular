@@ -36,6 +36,24 @@ export class EmpleadoService {
     }
   }
 
+  async put(data: Empleado): Promise<any> {
+    try {
+      // ==> Obtener Data
+      const dataSave = (await localStorage.getItem('empleados')) || '';
+      const dataParse: Array<Empleado> = dataSave ? JSON.parse(dataSave) : [];
+
+      const filter = dataParse && dataParse.filter((el) => el?.id !== data?.id);
+
+      const newData = [...filter, data];
+      await localStorage.removeItem('empleados'); // ==> Eliminar
+      await localStorage.setItem('empleados', JSON.stringify(newData)); // ==> Reemplazar
+
+      return Promise.resolve({ ok: true });
+    } catch (er) {
+      console.error('|| ==> Error Modify employee data <== ||', er);
+    }
+  }
+
   async delete(data: Empleado): Promise<any> {
     try {
       console.log('DELETE');
