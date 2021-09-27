@@ -27,7 +27,7 @@ export class EmpleadoComponent implements OnInit {
   public dataEmpleados!: Array<Empleado>;
   public showModal: boolean = false;
   public isEdit: boolean = false;
-  public isSelected: any = {}; // ==> Registro seleccionado
+  public isSelected!: Empleado; // ==> Registro seleccionado
 
   constructor(
     private fb: FormBuilder,
@@ -86,11 +86,13 @@ export class EmpleadoComponent implements OnInit {
         const exito = 'Información guardada correctamente';
         this.global.createNotification('success', 'Éxito', exito);
         this.obtainData();
+        this.empleadoForm.reset();
         this.inicializeForm();
         this.showModal = false;
       } else {
         const error = 'Error al guardar registro, intente más tarde';
         this.global.createNotification('error', 'Error', error);
+        this.empleadoForm.reset();
         this.inicializeForm();
         this.showModal = false;
       }
@@ -104,6 +106,7 @@ export class EmpleadoComponent implements OnInit {
   }
 
   edit(data: Empleado) {
+    this.isSelected = data;
     this.empleadoForm = this.fb.group({
       id: [{ value: data?.id, disabled: true }, [Validators.required]],
       nombre: [data?.nombre, Validators.required],
@@ -122,7 +125,12 @@ export class EmpleadoComponent implements OnInit {
       if (valid) {
         const dataForm = this.empleadoForm.value;
 
-        const result: any = await this.service.put(dataForm);
+        const data: Empleado = {
+          id: this.isSelected.id,
+          ...dataForm,
+        };
+
+        const result: any = await this.service.put(data);
 
         const { ok } = result;
 
@@ -130,12 +138,14 @@ export class EmpleadoComponent implements OnInit {
           const exito = 'Información modificada correctamente';
           this.global.createNotification('success', 'Éxito', exito);
           this.obtainData();
+          this.empleadoForm.reset();
           this.inicializeForm();
           this.showModal = false;
           this.isEdit = false;
         } else {
           const error = 'Error al modificar registro, intente más tarde';
           this.global.createNotification('error', 'Error', error);
+          this.empleadoForm.reset();
           this.inicializeForm();
           this.showModal = false;
         }
