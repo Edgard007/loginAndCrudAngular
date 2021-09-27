@@ -15,6 +15,74 @@
     </button>
   </div>
   <div class="containerTable">
+    <!-- Filtros-->
+    <div id="accordion">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button
+              class="btn btn-link"
+              data-toggle="collapse"
+              data-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              Filtros
+            </button>
+          </h5>
+        </div>
+        <div
+          id="collapseOne"
+          class="collapse"
+          aria-labelledby="headingOne"
+          data-parent="#accordion"
+        >
+          <div class="card-body">
+            <!--formulario-->
+            <form [formGroup]="filtrosForm" class="row">
+              <div class="col-md-4">
+                <div class="formGroup">
+                  <label>Tipo de vacuna:</label>
+                  <nz-select ngModel="tipoVacuna" style="width: 100%" formControlName="tipoVacuna">
+                    <nz-option nzValue="Sputnik" nzLabel="Sputnik"></nz-option>
+                    <nz-option
+                      nzValue="AstraZeneca"
+                      nzLabel="AstraZeneca"
+                    ></nz-option>
+                    <nz-option nzValue="Pfizer" nzLabel="Pfizer"></nz-option>
+                    <nz-option
+                      nzValue="Jhonson&Jhonson"
+                      nzLabel="Jhonson&Jhonson"
+                    ></nz-option>
+                  </nz-select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="formGroup">
+                  <label>Fecha de vacunación</label>
+                  <nz-date-picker style="width: 100%" formControlName="fechaVacuna"></nz-date-picker>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="formGroup">
+                  <label>N. dosis: </label>
+                  <nz-input-number
+                    [nzMin]="1"
+                    [nzMax]="10"
+                    [nzStep]="1"
+                    style="width: 100%"
+                    formControlName="numDosis"
+                  ></nz-input-number>
+                </div>
+              </div>
+            </form>
+            <!--fin formulario-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Listar datos-->
     <nz-table #dataEmpleado [nzData]="dataEmpleados">
       <thead>
         <tr>

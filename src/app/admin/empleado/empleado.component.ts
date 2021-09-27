@@ -23,6 +23,7 @@ export class EmpleadoComponent implements OnInit {
   public size: NzButtonSize = 'large';
 
   public empleadoForm!: FormGroup;
+  public filtrosForm!: FormGroup;
 
   public dataEmpleados!: Array<Empleado>;
   public showModal: boolean = false;
