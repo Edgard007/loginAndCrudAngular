@@ -16,6 +16,9 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -29,6 +32,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './public/login/login.component';
 import { EmpleadoComponent } from './admin/empleado/empleado.component';
 import { NavComponent } from './components/nav/nav.component';
+
 
 registerLocaleData(en);
 
@@ -48,6 +52,9 @@ registerLocaleData(en);
     NzIconModule,
     NzModalModule,
     NzInputModule,
+    NzSelectModule,
+    NzDatePickerModule,
+    NzInputNumberModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
