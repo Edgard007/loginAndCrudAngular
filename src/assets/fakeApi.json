@@ -8,13 +8,5 @@
       "user": "Admin",
       "password": "Admin2021$"
     }
-  ],
-  "employees": [
-    {
-      "id": "348918",
-      "nombre": "Francisco",
-      "apellido": "Palacios",
-      "correo": "edgar07hp@gmail.com"
-    }
   ]
 }
