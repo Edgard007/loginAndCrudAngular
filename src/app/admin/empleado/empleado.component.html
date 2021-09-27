@@ -55,7 +55,7 @@
 
 <nz-modal
   [(nzVisible)]="showModal"
-  nzTitle="Agregar Empleado"
+  [nzTitle]="(isEdit ? 'Editar' : 'Agregar') + ' Empleado'"
   (nzOnCancel)="this.showModal = false"
   (nzOnOk)="!isEdit ? validForm() : editRecord()"
 >

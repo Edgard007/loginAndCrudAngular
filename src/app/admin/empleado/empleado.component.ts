@@ -104,7 +104,7 @@ export class EmpleadoComponent implements OnInit {
 
   edit(data: Empleado) {
     this.empleadoForm = this.fb.group({
-      id: [data?.id, Validators.required],
+      id: [{ value: data?.id, disabled: true }, [Validators.required]],
       nombre: [data?.nombre, Validators.required],
       apellido: [data?.apellido, Validators.required],
       correo: [data?.correo, [Validators.required, Validators.email]],
