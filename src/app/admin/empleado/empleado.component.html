@@ -1,0 +1,25 @@
+<div class="containerBody">
+  <div class="container-titule">
+    <span class="title">Empleados</span>
+  </div>
+  <div class="containerTable">
+    <nz-table #dataEmpleado [nzData]="dataEmpleados">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Correo Electrónico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of dataEmpleado.data">
+          <td>{{ data.id }}</td>
+          <td>{{ data.nombre }}</td>
+          <td>{{ data.apellido }}</td>
+          <td>{{ data.correo }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

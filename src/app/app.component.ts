@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
 
   checkSesion() {
     try {
-      console.log('checkSesion');
       // ==> Band de Sesión
       const logged = localStorage.getItem('sesion') || '';
 

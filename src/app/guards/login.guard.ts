@@ -16,8 +16,8 @@ export class LoginGuard implements CanActivate {
       // ==> Verificar si existe sesión
       if (logged) {
         observer.next(false);
-        // ==> Si está logueado, mandar al Dashboard.
-        this.router.navigate(['dashboard']);
+        // ==> Si está logueado, mandar a la Pantalla Principal.
+        this.router.navigate(['empleados']);
         observer.complete();
       } else {
         observer.next(true);

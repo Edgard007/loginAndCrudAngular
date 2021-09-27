@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
         const userData = { userName: user, time: new Date() };
         await localStorage.setItem('sesion', JSON.stringify(userData) || ''); //==> Agregar bandera de Sesión
         this.app.checkSesion();
-        this.route.navigate(['/dashboard']);
+        this.route.navigate(['/empleados']);
       } else {
         this.global.createNotification(
           'error',

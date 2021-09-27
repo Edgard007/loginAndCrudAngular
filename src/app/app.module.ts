@@ -11,24 +11,25 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 
+// ==> Form
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 // ==> Pages
 import { AppComponent } from './app.component';
 import { LoginComponent } from './public/login/login.component';
-import { DashboardComponent } from './admin/dashboard/dashboard.component';
-
-// Form
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmpleadoComponent } from './admin/empleado/empleado.component';
 import { NavComponent } from './components/nav/nav.component';
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DashboardComponent, NavComponent],
+  declarations: [AppComponent, LoginComponent, NavComponent, EmpleadoComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -38,6 +39,7 @@ registerLocaleData(en);
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NzNotificationModule,
+    NzTableModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
