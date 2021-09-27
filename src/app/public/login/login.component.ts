@@ -8,6 +8,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalService } from '../../services/global/global.service';
 import { LoginService } from '../../services/Login/login.service';
 
+// ==> Components
+import { AppComponent } from '../../app.component';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,7 +24,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private services: LoginService,
     private global: GlobalService,
-    private route: Router
+    private route: Router,
+    private app: AppComponent
   ) {}
 
   ngOnInit(): void {
@@ -61,6 +65,7 @@ export class LoginComponent implements OnInit {
       if (ok) {
         const userData = { userName: user, time: new Date() };
         await localStorage.setItem('sesion', JSON.stringify(userData) || ''); //==> Agregar bandera de Sesión
+        this.app.checkSesion();
         this.route.navigate(['/dashboard']);
       } else {
         this.global.createNotification(
