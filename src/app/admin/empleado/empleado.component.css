@@ -39,3 +39,8 @@
 .formGroup {
   margin-top: 10px;
 }
+
+.anticon {
+  cursor: pointer;
+  font-size: 20px;
+}

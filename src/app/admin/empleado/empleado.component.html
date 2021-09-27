@@ -100,7 +100,20 @@
           <td>{{ data.apellido }}</td>
           <td>{{ data.correo }}</td>
           <td>
-            <i nz-icon nzType="delete" nzTheme="twotone"></i>
+            <i
+              nz-icon
+              nzType="edit"
+              nzTheme="twotone"
+              class="anticon mx-3"
+              (click)="edit(data)"
+            ></i>
+            <i
+              nz-icon
+              nzType="delete"
+              nzTheme="twotone"
+              class="anticon"
+              (click)="deleteRecord(data)"
+            ></i>
           </td>
         </tr>
       </tbody>
@@ -110,9 +123,9 @@
 
 <nz-modal
   [(nzVisible)]="showModal"
-  nzTitle="Agregar Empleado"
+  [nzTitle]="(isEdit ? 'Editar' : 'Agregar') + ' Empleado'"
   (nzOnCancel)="this.showModal = false"
-  (nzOnOk)="validForm()"
+  (nzOnOk)="!isEdit ? validForm() : editRecord()"
 >
   <ng-container *nzModalContent>
     <form [formGroup]="empleadoForm">
