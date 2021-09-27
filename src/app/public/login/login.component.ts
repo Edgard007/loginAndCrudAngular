@@ -58,8 +58,11 @@ export class LoginComponent implements OnInit {
       // ==> Destructurar Result
       const { ok } = result;
 
-      if (ok) this.route.navigate(['/dashboard']);
-      else {
+      if (ok) {
+        const userData = { userName: user, time: new Date() };
+        await localStorage.setItem('sesion', JSON.stringify(userData) || ''); //==> Agregar bandera de Sesión
+        this.route.navigate(['/dashboard']);
+      } else {
         this.global.createNotification(
           'error',
           'Error',
