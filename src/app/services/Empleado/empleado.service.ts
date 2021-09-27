@@ -29,4 +29,18 @@ export class EmpleadoService {
       );
     });
   }
+
+  post(data: Empleado) {
+    return new Promise((resolve, reject) => {
+      this.httpClient.post('assets/fakeApi.json', data).subscribe(
+        (res: any) => {
+          console.log('RESULT', res);
+        },
+        (er) => {
+          console.error('|| ==> Error saving employee data <== ||', er);
+          reject(er);
+        }
+      );
+    });
+  }
 }

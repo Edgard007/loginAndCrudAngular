@@ -12,6 +12,10 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -40,6 +44,10 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     NzNotificationModule,
     NzTableModule,
+    NzButtonModule,
+    NzIconModule,
+    NzModalModule,
+    NzInputModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],

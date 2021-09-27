@@ -21,3 +21,21 @@
 .containerTable {
   padding: 20px;
 }
+
+.headerTable {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding-left: 13px;
+  padding-right: 13px;
+}
+
+.ant-btn-round.ant-btn-lg {
+  display: flex;
+  align-items: center;
+}
+
+.formGroup {
+  margin-top: 10px;
+}
