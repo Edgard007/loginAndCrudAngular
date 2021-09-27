@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 // ==> Interfaces
 import { Empleado } from '../../intefraces/empleado';
@@ -8,7 +7,7 @@ import { Empleado } from '../../intefraces/empleado';
   providedIn: 'root',
 })
 export class EmpleadoService {
-  constructor(private httpClient: HttpClient) {}
+  constructor() {}
 
   async get(): Promise<any> {
     try {
@@ -23,16 +22,35 @@ export class EmpleadoService {
 
   async post(data: Empleado): Promise<any> {
     try {
+      // ==> Obtener Data
       const dataSave = (await localStorage.getItem('empleados')) || '';
       const dataParse = dataSave ? JSON.parse(dataSave) : [];
 
       const newData = [...dataParse, data];
-      await localStorage.removeItem('empleados');
-      await localStorage.setItem('empleados', JSON.stringify(newData));
+      await localStorage.removeItem('empleados'); // ==> Eliminar
+      await localStorage.setItem('empleados', JSON.stringify(newData)); // ==> Reemplazar
 
       return Promise.resolve({ ok: true });
     } catch (er) {
       console.error('|| ==> Error saving employee data <== ||', er);
+    }
+  }
+
+  async delete(data: Empleado): Promise<any> {
+    try {
+      console.log('DELETE');
+      // ==> Obtener Data
+      const dataSave = (await localStorage.getItem('empleados')) || '';
+      const dataParse: Array<Empleado> = dataSave ? JSON.parse(dataSave) : [];
+
+      const filter = dataParse && dataParse.filter((el) => el?.id !== data?.id);
+
+      await localStorage.removeItem('empleados'); // ==> Eliminar
+      await localStorage.setItem('empleados', JSON.stringify(filter)); // ==> Reemplazar
+
+      return Promise.resolve({ ok: true });
+    } catch (er) {
+      console.error('|| ==> Error Delete employee data <== ||', er);
     }
   }
 }

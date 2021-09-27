@@ -32,7 +32,13 @@
           <td>{{ data.apellido }}</td>
           <td>{{ data.correo }}</td>
           <td>
-            <i nz-icon nzType="delete" nzTheme="twotone"></i>
+            <i
+              nz-icon
+              nzType="delete"
+              nzTheme="twotone"
+              class="anticon"
+              (click)="deleteRecord(data)"
+            ></i>
           </td>
         </tr>
       </tbody>

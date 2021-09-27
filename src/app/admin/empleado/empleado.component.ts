@@ -26,6 +26,7 @@ export class EmpleadoComponent implements OnInit {
 
   public dataEmpleados!: Array<Empleado>;
   public showModal: boolean = false;
+  public isSelected: any = {}; // ==> Registro seleccionado
 
   constructor(
     private fb: FormBuilder,
@@ -97,6 +98,27 @@ export class EmpleadoComponent implements OnInit {
         'Error',
         'Por favor, complete el formulario'
       );
+    }
+  }
+
+  async deleteRecord(data: Empleado) {
+    try {
+      const result: any = await this.service.delete(data);
+
+      const { ok } = result;
+
+      if (ok) {
+        this.obtainData();
+        const exito = 'Información eliminada correctamente';
+        this.global.createNotification('success', 'Éxito', exito);
+      } else {
+        const error = 'Error al Eliminar Registro';
+        this.global.createNotification('error', 'Error', error);
+      }
+    } catch (er) {
+      const error = 'Error al Eliminar Registro';
+      // this.global.createNotification('error', 'Error', error);
+      console.error('|| ==> Error deleteRecord <== ||', er);
     }
   }
 }
