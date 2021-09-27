@@ -82,6 +82,7 @@ export class EmpleadoComponent implements OnInit {
       const { ok } = result;
 
       if (ok) {
+        await this.service.craeteUser(dataForm);
         const exito = 'Información guardada correctamente';
         this.global.createNotification('success', 'Éxito', exito);
         this.obtainData();

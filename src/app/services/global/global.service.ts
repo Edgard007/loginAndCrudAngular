@@ -38,4 +38,12 @@ export class GlobalService {
       nzOnOk: () => okFunction(),
     });
   }
+
+  /**
+   * Generador de codigos
+   * @returns Ramdom Number
+   */
+  getRndInteger() {
+    return Math.floor(Math.random() * (999 - 100 + 1)) + 100;
+  }
 }
